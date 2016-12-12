@@ -1,3 +1,4 @@
+.PHONY: all
 all: opcodes
 
 mktables: mktables.c
@@ -8,7 +9,6 @@ force: clean opcodes
 .PHONY: opcodes
 opcodes: mktables opcodes.lst mktables.spec
 	./mktables
-	cat opcodes_impl.c | grep "static void" | sed "s/)/);/g" >opcodes_decl.h
 
 .PHONY: clean
 clean:

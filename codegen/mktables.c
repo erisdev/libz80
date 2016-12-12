@@ -230,7 +230,7 @@ int printCall (char* s, FILE* code)
 
 
 /** Reads the opcode list and generates output code based on the spec */
-void generateCodeTable (FILE* opcodes, FILE* code)
+void generateCodeTable (FILE* opcodes, FILE* code, FILE* header)
 {
 	char line[MAX_LINE];
 	char last[MAX_LINE];
@@ -282,6 +282,7 @@ void generateCodeTable (FILE* opcodes, FILE* code)
 		/* Print function stub */
 		fixName(line, name);
 		fprintf(code, "static void %s (Z80Context* ctx)\n{\n", name);
+		fprintf(header, "static void %s (Z80Context* ctx);\n", name);
 
 		/* Substitute submatches in each output line and print the code */
 		cmds = item->line;
@@ -315,7 +316,7 @@ void generateCodeTable (FILE* opcodes, FILE* code)
 
 void generateCode (void)
 {
-	FILE* spec, *opcodes, *code, *table;
+	FILE* spec, *opcodes, *code, *header, *table;
 
 	/* ----- Read the specification ----- */
 	printf("Reading specification...");
@@ -328,11 +329,13 @@ void generateCode (void)
 
 	opcodes = openOrDie(OPCODES_LIST, "rb");
 	code = openOrDie(OPCODES_IMPL, "wb");
+	header = openOrDie(OPCODES_HEADER, "wb");
 
-	generateCodeTable(opcodes, code);
+	generateCodeTable(opcodes, code, header);
 
 	fclose(opcodes);
 	fclose(code);
+	fclose(header);
 }
 
 
