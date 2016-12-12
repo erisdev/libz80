@@ -11,6 +11,7 @@
  * This utility generates most of the emulation code from the opcode specification
  *
  */
+#include <stdint.h>
 #include "ctype.h"
 #include "stdio.h"
 #include "regex.h"
@@ -37,7 +38,6 @@
 /* =========================================================
  *  Helpers
  * ========================================================= */
-typedef unsigned char byte;
 
 /** Print error and exit. */
 void fatal(char* s)
@@ -411,7 +411,7 @@ typedef enum
 } TokenType;
 
 
-char* nextToken(char* cur, byte* val, TokenType* ttype)
+char* nextToken(char* cur, uint8_t* val, TokenType* ttype)
 {
 	*ttype = TT_END;
 	while (*cur)
@@ -470,9 +470,9 @@ struct Z80OpcodeTable* createTableTree(FILE* opcodes, FILE* table)
 	char line[MAX_LINE];
 	char tmp[MAX_LINE];
 	char* cur;
-	byte code;
+	uint8_t code;
 	TokenType tt;
-	byte prefix[10];
+	uint8_t prefix[10];
 	int prefixLen, i;
 	int wasOperand;
 	int opcodeOffset;
@@ -557,7 +557,7 @@ void scanOpcodes(FILE* opcodes, struct Z80OpcodeTable* mainTable)
 	char name[MAX_LINE];
 	char fmt[MAX_LINE];
 	char* cur;
-	byte code;
+	uint8_t code;
 	TokenType tt;
 	struct Z80OpcodeTable* current;
 	struct Z80OpcodeEntry* ent;

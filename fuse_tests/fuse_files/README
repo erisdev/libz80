@@ -70,4 +70,3 @@ dd00.in, ddfd00.in: test timings of "extended NOP" opcodes DD 00 and
 		    DD FD 00; the extra 00 at the end is to check the
 		    next opcode executes at the right time (bug fixed
 		    on 20060722).
-

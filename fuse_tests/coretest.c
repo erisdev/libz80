@@ -35,28 +35,28 @@ static const char *progname;		/* argv[0] */
 static const char *testsfile;		/* argv[1] */
 
 /* 64Kb of RAM */
-static byte initial_memory[ 0x10000 ], memory[ 0x10000 ];
+static uint8_t initial_memory[ 0x10000 ], memory[ 0x10000 ];
 
 static Z80Context context;
 
-static byte context_mem_read_callback(int param, ushort address)
+static uint8_t context_mem_read_callback(int param, uint16_t address)
 {
   return memory[address];
 }
 
-static void context_mem_write_callback(int param, ushort address, byte data)
+static void context_mem_write_callback(int param, uint16_t address, uint8_t data)
 {
   memory[address] = data;
 }
 
-static byte context_io_read_callback(int param, ushort address)
+static uint8_t context_io_read_callback(int param, uint16_t address)
 {
-  byte data = address >> 8;
+  uint8_t data = address >> 8;
   printf("PR %04x %02x\n", address, data);
   return data;
 }
 
-static void context_io_write_callback(int param, ushort address, byte data)
+static void context_io_write_callback(int param, uint16_t address, uint8_t data)
 {
   printf("PW %04x %02x\n", address, data);
 }

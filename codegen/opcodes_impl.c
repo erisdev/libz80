@@ -404,7 +404,7 @@ static void BIT_0_off_HL (Z80Context* ctx)
 static void BIT_0_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 0, address);
 }
 
@@ -412,7 +412,7 @@ static void BIT_0_off_IX_d (Z80Context* ctx)
 static void BIT_0_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 0, address);
 }
 
@@ -469,7 +469,7 @@ static void BIT_1_off_HL (Z80Context* ctx)
 static void BIT_1_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 1, address);
 }
 
@@ -477,7 +477,7 @@ static void BIT_1_off_IX_d (Z80Context* ctx)
 static void BIT_1_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 1, address);
 }
 
@@ -534,7 +534,7 @@ static void BIT_2_off_HL (Z80Context* ctx)
 static void BIT_2_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 2, address);
 }
 
@@ -542,7 +542,7 @@ static void BIT_2_off_IX_d (Z80Context* ctx)
 static void BIT_2_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 2, address);
 }
 
@@ -599,7 +599,7 @@ static void BIT_3_off_HL (Z80Context* ctx)
 static void BIT_3_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 3, address);
 }
 
@@ -607,7 +607,7 @@ static void BIT_3_off_IX_d (Z80Context* ctx)
 static void BIT_3_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 3, address);
 }
 
@@ -664,7 +664,7 @@ static void BIT_4_off_HL (Z80Context* ctx)
 static void BIT_4_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 4, address);
 }
 
@@ -672,7 +672,7 @@ static void BIT_4_off_IX_d (Z80Context* ctx)
 static void BIT_4_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 4, address);
 }
 
@@ -729,7 +729,7 @@ static void BIT_5_off_HL (Z80Context* ctx)
 static void BIT_5_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 5, address);
 }
 
@@ -737,7 +737,7 @@ static void BIT_5_off_IX_d (Z80Context* ctx)
 static void BIT_5_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 5, address);
 }
 
@@ -794,7 +794,7 @@ static void BIT_6_off_HL (Z80Context* ctx)
 static void BIT_6_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 6, address);
 }
 
@@ -802,7 +802,7 @@ static void BIT_6_off_IX_d (Z80Context* ctx)
 static void BIT_6_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 6, address);
 }
 
@@ -859,7 +859,7 @@ static void BIT_7_off_HL (Z80Context* ctx)
 static void BIT_7_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IX + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IX + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 7, address);
 }
 
@@ -867,7 +867,7 @@ static void BIT_7_off_IX_d (Z80Context* ctx)
 static void BIT_7_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	ushort address = WR.IY + (char) read8(ctx, ctx->PC++);
+	uint16_t address = WR.IY + (char) read8(ctx, ctx->PC++);
 	doBIT_indexed(ctx, 7, address);
 }
 
@@ -916,7 +916,7 @@ static void BIT_7_L (Z80Context* ctx)
 
 static void CALL_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_))
 	{
@@ -930,7 +930,7 @@ static void CALL_off_nn (Z80Context* ctx)
 
 static void CALL_C_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_C))
 	{
@@ -944,7 +944,7 @@ static void CALL_C_off_nn (Z80Context* ctx)
 
 static void CALL_M_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_M))
 	{
@@ -958,7 +958,7 @@ static void CALL_M_off_nn (Z80Context* ctx)
 
 static void CALL_NC_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_NC))
 	{
@@ -972,7 +972,7 @@ static void CALL_NC_off_nn (Z80Context* ctx)
 
 static void CALL_NZ_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_NZ))
 	{
@@ -986,7 +986,7 @@ static void CALL_NZ_off_nn (Z80Context* ctx)
 
 static void CALL_P_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_P))
 	{
@@ -1000,7 +1000,7 @@ static void CALL_P_off_nn (Z80Context* ctx)
 
 static void CALL_PE_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_PE))
 	{
@@ -1014,7 +1014,7 @@ static void CALL_PE_off_nn (Z80Context* ctx)
 
 static void CALL_PO_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_PO))
 	{
@@ -1028,7 +1028,7 @@ static void CALL_PO_off_nn (Z80Context* ctx)
 
 static void CALL_Z_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_Z))
 	{
@@ -1042,7 +1042,7 @@ static void CALL_Z_off_nn (Z80Context* ctx)
 
 static void CCF (Z80Context* ctx)
 {
-	VALFLAG(F_C, (1 - (byte)GETFLAG(F_C) != 0));
+	VALFLAG(F_C, (1 - (uint8_t)GETFLAG(F_C) != 0));
 	RESFLAG(F_N);
 	adjustFlags(ctx, BR.A);
 }
@@ -1058,7 +1058,7 @@ static void CP_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 5;
 	char displacement = read8(ctx, ctx->PC++);
-	byte val = read8(ctx, WR.IX + displacement);
+	uint8_t val = read8(ctx, WR.IX + displacement);
 	doArithmetic(ctx, val, 0, 1);	
 	adjustFlags(ctx, val);
 }
@@ -1068,7 +1068,7 @@ static void CP_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 5;
 	char displacement = read8(ctx, ctx->PC++);
-	byte val = read8(ctx, WR.IY + displacement);
+	uint8_t val = read8(ctx, WR.IY + displacement);
 	doArithmetic(ctx, val, 0, 1);	
 	adjustFlags(ctx, val);
 }
@@ -1153,7 +1153,7 @@ static void CP_L (Z80Context* ctx)
 
 static void CP_n (Z80Context* ctx)
 {
-	byte val = read8(ctx, ctx->PC++);
+	uint8_t val = read8(ctx, ctx->PC++);
 	doArithmetic(ctx, val, 0, 1);	
 	adjustFlags(ctx, val);
 }
@@ -1163,7 +1163,7 @@ static void CPD (Z80Context* ctx)
 {
 	ctx->tstates += 5;
 	int carry = GETFLAG(F_C);
-	byte value = doCP_HL(ctx);
+	uint8_t value = doCP_HL(ctx);
 	if(GETFLAG(F_H))
 		value--;
 	WR.HL--;
@@ -1193,7 +1193,7 @@ static void CPI (Z80Context* ctx)
 {
 	ctx->tstates += 5;
 	int carry = GETFLAG(F_C);
-	byte value = doCP_HL(ctx);
+	uint8_t value = doCP_HL(ctx);
 	if(GETFLAG(F_H))
 		value--;
 	WR.HL++;
@@ -1235,7 +1235,7 @@ static void DAA (Z80Context* ctx)
 static void DEC_off_HL (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte value = read8(ctx, WR.HL);
+	uint8_t value = read8(ctx, WR.HL);
 	write8(ctx, WR.HL, doIncDec(ctx, value, ID_DEC));
 }
 
@@ -1244,7 +1244,7 @@ static void DEC_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 6;
 	char off = read8(ctx, ctx->PC++);
-	byte value = read8(ctx, WR.IX + off);
+	uint8_t value = read8(ctx, WR.IX + off);
 	write8(ctx, WR.IX + off, doIncDec(ctx, value, ID_DEC));
 	
 }
@@ -1254,7 +1254,7 @@ static void DEC_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 6;
 	char off = read8(ctx, ctx->PC++);
-	byte value = read8(ctx, WR.IY + off);
+	uint8_t value = read8(ctx, WR.IY + off);
 	write8(ctx, WR.IY + off, doIncDec(ctx, value, ID_DEC));
 	
 }
@@ -1398,7 +1398,7 @@ static void EI (Z80Context* ctx)
 static void EX_off_SP_HL (Z80Context* ctx)
 {
 	ctx->tstates += 3;
-	ushort tmp = read16(ctx, WR.SP);
+	uint16_t tmp = read16(ctx, WR.SP);
 	write16(ctx, WR.SP, WR.HL);
 	WR.HL = tmp;
 }
@@ -1407,7 +1407,7 @@ static void EX_off_SP_HL (Z80Context* ctx)
 static void EX_off_SP_IX (Z80Context* ctx)
 {
 	ctx->tstates += 3;
-	ushort tmp = read16(ctx, WR.SP);
+	uint16_t tmp = read16(ctx, WR.SP);
 	write16(ctx, WR.SP, WR.IX);
 	WR.IX = tmp;
 }
@@ -1416,7 +1416,7 @@ static void EX_off_SP_IX (Z80Context* ctx)
 static void EX_off_SP_IY (Z80Context* ctx)
 {
 	ctx->tstates += 3;
-	ushort tmp = read16(ctx, WR.SP);
+	uint16_t tmp = read16(ctx, WR.SP);
 	write16(ctx, WR.SP, WR.IY);
 	WR.IY = tmp;
 }
@@ -1424,7 +1424,7 @@ static void EX_off_SP_IY (Z80Context* ctx)
 
 static void EX_AF_AF_ (Z80Context* ctx)
 {
-	ushort tmp = ctx->R1.wr.AF;
+	uint16_t tmp = ctx->R1.wr.AF;
 	ctx->R1.wr.AF = ctx->R2.wr.AF;
 	ctx->R2.wr.AF = tmp;
 }
@@ -1432,7 +1432,7 @@ static void EX_AF_AF_ (Z80Context* ctx)
 
 static void EX_DE_HL (Z80Context* ctx)
 {
-	ushort tmp = WR.DE;
+	uint16_t tmp = WR.DE;
 	WR.DE = WR.HL;
 	WR.HL = tmp;
 }
@@ -1440,7 +1440,7 @@ static void EX_DE_HL (Z80Context* ctx)
 
 static void EXX (Z80Context* ctx)
 {
-	ushort tmp;	
+	uint16_t tmp;	
 	tmp = ctx->R1.wr.BC;
 	ctx->R1.wr.BC = ctx->R2.wr.BC;
 	ctx->R2.wr.BC = tmp;	
@@ -1491,7 +1491,7 @@ static void IN_A_off_C (Z80Context* ctx)
 
 static void IN_A_off_n (Z80Context* ctx)
 {
-	byte port = read8(ctx, ctx->PC++);	
+	uint8_t port = read8(ctx, ctx->PC++);	
 	BR.A = ioRead(ctx, BR.A << 8 | port);
 }
 
@@ -1562,7 +1562,7 @@ static void IN_L_off_C (Z80Context* ctx)
 static void INC_off_HL (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte value = read8(ctx, WR.HL);
+	uint8_t value = read8(ctx, WR.HL);
 	write8(ctx, WR.HL, doIncDec(ctx, value, ID_INC));
 }
 
@@ -1571,7 +1571,7 @@ static void INC_off_IX_d (Z80Context* ctx)
 {
 	ctx->tstates += 6;
 	char off = read8(ctx, ctx->PC++);
-	byte value = read8(ctx, WR.IX + off);
+	uint8_t value = read8(ctx, WR.IX + off);
 	write8(ctx, WR.IX + off, doIncDec(ctx, value, ID_INC));
 	
 }
@@ -1581,7 +1581,7 @@ static void INC_off_IY_d (Z80Context* ctx)
 {
 	ctx->tstates += 6;
 	char off = read8(ctx, ctx->PC++);
-	byte value = read8(ctx, WR.IY + off);
+	uint8_t value = read8(ctx, WR.IY + off);
 	write8(ctx, WR.IY + off, doIncDec(ctx, value, ID_INC));
 	
 }
@@ -1698,7 +1698,7 @@ static void INC_SP (Z80Context* ctx)
 static void IND (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte val = ioRead(ctx, WR.BC);
+	uint8_t val = ioRead(ctx, WR.BC);
 	write8(ctx, WR.HL, val);
 	WR.HL--;
 	BR.B = doIncDec(ctx, BR.B, ID_DEC);
@@ -1724,7 +1724,7 @@ static void INDR (Z80Context* ctx)
 static void INI (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte val = ioRead(ctx, WR.BC);
+	uint8_t val = ioRead(ctx, WR.BC);
 	write8(ctx, WR.HL, val);
 	WR.HL++;
 	BR.B = doIncDec(ctx, BR.B, ID_DEC);
@@ -1770,7 +1770,7 @@ static void JP_off_IY (Z80Context* ctx)
 
 static void JP_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_))
 		ctx->PC = addr;
@@ -1780,7 +1780,7 @@ static void JP_off_nn (Z80Context* ctx)
 
 static void JP_C_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_C))
 		ctx->PC = addr;
@@ -1790,7 +1790,7 @@ static void JP_C_off_nn (Z80Context* ctx)
 
 static void JP_M_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_M))
 		ctx->PC = addr;
@@ -1800,7 +1800,7 @@ static void JP_M_off_nn (Z80Context* ctx)
 
 static void JP_NC_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_NC))
 		ctx->PC = addr;
@@ -1810,7 +1810,7 @@ static void JP_NC_off_nn (Z80Context* ctx)
 
 static void JP_NZ_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_NZ))
 		ctx->PC = addr;
@@ -1820,7 +1820,7 @@ static void JP_NZ_off_nn (Z80Context* ctx)
 
 static void JP_P_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_P))
 		ctx->PC = addr;
@@ -1830,7 +1830,7 @@ static void JP_P_off_nn (Z80Context* ctx)
 
 static void JP_PE_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_PE))
 		ctx->PC = addr;
@@ -1840,7 +1840,7 @@ static void JP_PE_off_nn (Z80Context* ctx)
 
 static void JP_PO_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_PO))
 		ctx->PC = addr;
@@ -1850,7 +1850,7 @@ static void JP_PO_off_nn (Z80Context* ctx)
 
 static void JP_Z_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	if (condition(ctx, C_Z))
 		ctx->PC = addr;
@@ -2034,7 +2034,7 @@ static void LD_off_IX_d_n (Z80Context* ctx)
 {
 	ctx->tstates += 2;
 	char offset = read8(ctx, ctx->PC++);
-	byte n = read8(ctx, ctx->PC++);
+	uint8_t n = read8(ctx, ctx->PC++);
 	write8(ctx, WR.IX + offset, n);
 	
 }
@@ -2100,7 +2100,7 @@ static void LD_off_IY_d_n (Z80Context* ctx)
 {
 	ctx->tstates += 2;
 	char offset = read8(ctx, ctx->PC++);
-	byte n = read8(ctx, ctx->PC++);
+	uint8_t n = read8(ctx, ctx->PC++);
 	write8(ctx, WR.IY + offset, n);
 	
 }
@@ -3276,7 +3276,7 @@ static void LD_B_SRL_off_IY_d (Z80Context* ctx)
 
 static void LD_BC_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.BC = read16(ctx, addr);	
 }
@@ -4358,7 +4358,7 @@ static void LD_D_SRL_off_IY_d (Z80Context* ctx)
 
 static void LD_DE_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.DE = read16(ctx, addr);	
 }
@@ -5416,7 +5416,7 @@ static void LD_H_SRL_off_IY_d (Z80Context* ctx)
 
 static void LD_HL_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.HL = read16(ctx, addr);	
 }
@@ -5439,7 +5439,7 @@ static void LD_I_A (Z80Context* ctx)
 
 static void LD_IX_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.IX = read16(ctx, addr);	
 }
@@ -5553,7 +5553,7 @@ static void LD_IXl_n (Z80Context* ctx)
 
 static void LD_IY_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.IY = read16(ctx, addr);	
 }
@@ -6183,7 +6183,7 @@ static void LD_R_A (Z80Context* ctx)
 
 static void LD_SP_off_nn (Z80Context* ctx)
 {
-	ushort addr = read16(ctx, ctx->PC);
+	uint16_t addr = read16(ctx, ctx->PC);
 	ctx->PC += 2;
 	WR.SP = read16(ctx, addr);	
 }
@@ -6221,7 +6221,7 @@ static void LD_SP_nn (Z80Context* ctx)
 static void LDD (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	byte val = read8(ctx, WR.HL);
+	uint8_t val = read8(ctx, WR.HL);
 	write8(ctx, WR.DE, val);
 	WR.DE--;
 	WR.HL--;
@@ -6247,7 +6247,7 @@ static void LDDR (Z80Context* ctx)
 static void LDI (Z80Context* ctx)
 {
 	ctx->tstates += 2;
-	byte val = read8(ctx, WR.HL);
+	uint8_t val = read8(ctx, WR.HL);
 	write8(ctx, WR.DE, val);
 	WR.DE++;
 	WR.HL++;
@@ -6458,7 +6458,7 @@ static void OUT_off_n_A (Z80Context* ctx)
 static void OUTD (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte value = read8(ctx, WR.HL);
+	uint8_t value = read8(ctx, WR.HL);
 	BR.B = doIncDec(ctx, BR.B, 1);
 	ioWrite(ctx, WR.BC, value);
 	WR.HL--;
@@ -6474,7 +6474,7 @@ static void OUTD (Z80Context* ctx)
 static void OUTI (Z80Context* ctx)
 {
 	ctx->tstates += 1;
-	byte value = read8(ctx, WR.HL);
+	uint8_t value = read8(ctx, WR.HL);
 	BR.B = doIncDec(ctx, BR.B, 1);
 	ioWrite(ctx, WR.BC, value);
 	WR.HL++;
@@ -7361,8 +7361,8 @@ static void RLCA (Z80Context* ctx)
 static void RLD (Z80Context* ctx)
 {
 	ctx->tstates += 4;
-	byte Ah = BR.A & 0x0f;
-	byte hl = read8(ctx, WR.HL);
+	uint8_t Ah = BR.A & 0x0f;
+	uint8_t hl = read8(ctx, WR.HL);
 	BR.A = (BR.A & 0xf0) | ((hl & 0xf0) >> 4);
 	hl = (hl << 4) | Ah;
 	write8(ctx, WR.HL, hl);
@@ -7523,8 +7523,8 @@ static void RRCA (Z80Context* ctx)
 static void RRD (Z80Context* ctx)
 {
 	ctx->tstates += 4;
-	byte Ah = BR.A & 0x0f;
-	byte hl = read8(ctx, WR.HL);
+	uint8_t Ah = BR.A & 0x0f;
+	uint8_t hl = read8(ctx, WR.HL);
 	BR.A = (BR.A & 0xf0) | (hl & 0x0f);
 	hl = (hl >> 4) | (Ah << 4);
 	write8(ctx, WR.HL, hl);

@@ -130,43 +130,43 @@ struct Z80OpcodeTable
  *  Data operations
  * --------------------------------------------------------- 
  */ 
-static void write8 (Z80Context* ctx, ushort addr, byte val)
+static void write8 (Z80Context* ctx, uint16_t addr, uint8_t val)
 {
 	ctx->tstates += 3;
 	ctx->memWrite(ctx->memParam, addr, val);	
 }
 
 
-static void write16 (Z80Context* ctx, ushort addr, ushort val)
+static void write16 (Z80Context* ctx, uint16_t addr, uint16_t val)
 {
 	write8(ctx, addr, val);
 	write8(ctx, addr + 1, val >> 8);
 }
 
 
-static byte read8 (Z80Context* ctx, ushort addr)
+static uint8_t read8 (Z80Context* ctx, uint16_t addr)
 {
 	ctx->tstates += 3;
 	return ctx->memRead(ctx->memParam, addr);	
 }
 
 
-static ushort read16 (Z80Context* ctx, ushort addr)
+static uint16_t read16 (Z80Context* ctx, uint16_t addr)
 {
-	byte lsb = read8(ctx, addr);
-	byte msb = read8(ctx, addr + 1);
+	uint8_t lsb = read8(ctx, addr);
+	uint8_t msb = read8(ctx, addr + 1);
 	return msb << 8 | lsb;
 }
 
 
-static byte ioRead (Z80Context* ctx, ushort addr)
+static uint8_t ioRead (Z80Context* ctx, uint16_t addr)
 {
 	ctx->tstates += 4;
 	return ctx->ioRead(ctx->ioParam, addr);
 }
 
 
-static void ioWrite (Z80Context* ctx, ushort addr, byte val)
+static void ioWrite (Z80Context* ctx, uint16_t addr, uint8_t val)
 {
 	ctx->tstates += 4;
 	ctx->ioWrite(ctx->ioParam, addr, val);
@@ -230,14 +230,14 @@ static int parityBit[256] = {
 	1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1 };
 
 
-static void adjustFlags (Z80Context* ctx, byte val)
+static void adjustFlags (Z80Context* ctx, uint8_t val)
 {
 	VALFLAG(F_5, (val & F_5) != 0);
 	VALFLAG(F_3, (val & F_3) != 0);
 }
 
 
-static void adjustFlagSZP (Z80Context* ctx, byte val)
+static void adjustFlagSZP (Z80Context* ctx, uint8_t val)
 {
 	VALFLAG(F_S, (val & 0x80) != 0);
 	VALFLAG(F_Z, (val == 0));
@@ -314,7 +314,7 @@ static int condition(Z80Context* ctx, Z80Condition cond)
  */
  
  
-static int doComplement(byte v)
+static int doComplement(uint8_t v)
 {
 	if ((v & 0x80) == 0)
 		return v;
@@ -328,9 +328,9 @@ static int doComplement(byte v)
 
  
 /** Do an arithmetic operation (ADD, SUB, ADC, SBC y CP) */
-static byte doArithmetic (Z80Context* ctx, byte value, int withCarry, int isSub)
+static uint8_t doArithmetic (Z80Context* ctx, uint8_t value, int withCarry, int isSub)
 {
-	ushort res; /* To detect carry */
+	uint16_t res; /* To detect carry */
 
 	if (isSub)
 	{
@@ -362,12 +362,12 @@ static byte doArithmetic (Z80Context* ctx, byte value, int withCarry, int isSub)
 	VALFLAG(F_PV, overflow);
 	adjustFlags(ctx, res);
 
-	return (byte)(res & 0xFF);
+	return (uint8_t)(res & 0xFF);
 }
 
 
 /* Do a 16-bit addition, setting the appropriate flags. */
-static ushort doAddWord(Z80Context* ctx, ushort a1, ushort a2, int withCarry, int isSub)
+static uint16_t doAddWord(Z80Context* ctx, uint16_t a1, uint16_t a2, int withCarry, int isSub)
 {
 	if(withCarry && GETFLAG(F_C))
 		a2++;
@@ -403,28 +403,28 @@ static ushort doAddWord(Z80Context* ctx, ushort a1, ushort a2, int withCarry, in
 }
 
 
-static void doAND (Z80Context* ctx, byte value)
+static void doAND (Z80Context* ctx, uint8_t value)
 {
 	BR.A &= value;
 	adjustLogicFlag(ctx, 1);
 }
 
 
-static void doOR (Z80Context* ctx, byte value)
+static void doOR (Z80Context* ctx, uint8_t value)
 {
 	BR.A |= value;
 	adjustLogicFlag(ctx, 0);
 }
 
 
-static void doXOR (Z80Context* ctx, byte value)
+static void doXOR (Z80Context* ctx, uint8_t value)
 {
 	BR.A ^= value;
 	adjustLogicFlag(ctx, 0);
 }
 
 
-static void doBIT (Z80Context* ctx, int b, byte val)
+static void doBIT (Z80Context* ctx, int b, uint8_t val)
 {
 	if (val & (1 << b))
         RESFLAG(F_Z | F_PV);
@@ -440,7 +440,7 @@ static void doBIT (Z80Context* ctx, int b, byte val)
 }
 
 
-static void doBIT_r(Z80Context* ctx, int b, byte val)
+static void doBIT_r(Z80Context* ctx, int b, uint8_t val)
 {
 	doBIT(ctx, b, val);
 	VALFLAG(F_5, val & F_5);
@@ -448,16 +448,16 @@ static void doBIT_r(Z80Context* ctx, int b, byte val)
 }
 
 
-static void doBIT_indexed(Z80Context* ctx, int b, ushort address)
+static void doBIT_indexed(Z80Context* ctx, int b, uint16_t address)
 {
-	byte val = read8(ctx, address);
+	uint8_t val = read8(ctx, address);
 	doBIT(ctx, b, val);
 	VALFLAG(F_5, (address >> 8) & F_5);
 	VALFLAG(F_3, (address >> 8) & F_3);
 }
 
 
-byte doSetRes (Z80Context* ctx, int bit, int pos, byte val)
+uint8_t doSetRes (Z80Context* ctx, int bit, int pos, uint8_t val)
 {
     if (bit)
 		val |= (1 << pos);
@@ -468,7 +468,7 @@ byte doSetRes (Z80Context* ctx, int bit, int pos, byte val)
 
 
 
-static byte doIncDec (Z80Context* ctx, byte val, int isDec)
+static uint8_t doIncDec (Z80Context* ctx, uint8_t val, int isDec)
 {
     if (isDec)
     {
@@ -493,11 +493,11 @@ static byte doIncDec (Z80Context* ctx, byte val, int isDec)
 }
 
 
-static byte doRLC (Z80Context* ctx, int adjFlags, byte val)
+static uint8_t doRLC (Z80Context* ctx, int adjFlags, uint8_t val)
 {
     VALFLAG(F_C, (val & 0x80) != 0);
     val <<= 1;
-    val |= (byte)GETFLAG(F_C);
+    val |= (uint8_t)GETFLAG(F_C);
 
     adjustFlags(ctx, val);
     RESFLAG(F_H | F_N);
@@ -509,12 +509,12 @@ static byte doRLC (Z80Context* ctx, int adjFlags, byte val)
 }
 
 
-static byte doRL (Z80Context* ctx, int adjFlags, byte val)
+static uint8_t doRL (Z80Context* ctx, int adjFlags, uint8_t val)
 {
     int CY = GETFLAG(F_C);
     VALFLAG(F_C, (val & 0x80) != 0);
     val <<= 1;
-    val |= (byte)CY;
+    val |= (uint8_t)CY;
 
     adjustFlags(ctx, val);
     RESFLAG(F_H | F_N);
@@ -526,11 +526,11 @@ static byte doRL (Z80Context* ctx, int adjFlags, byte val)
 }
 
 
-static byte doRRC (Z80Context* ctx, int adjFlags, byte val)
+static uint8_t doRRC (Z80Context* ctx, int adjFlags, uint8_t val)
 {
     VALFLAG(F_C, (val & 0x01) != 0);
     val >>= 1;
-    val |= ((byte)GETFLAG(F_C) << 7);
+    val |= ((uint8_t)GETFLAG(F_C) << 7);
 
     adjustFlags(ctx, val);
     RESFLAG(F_H | F_N);
@@ -542,7 +542,7 @@ static byte doRRC (Z80Context* ctx, int adjFlags, byte val)
 }
 
 
-static byte doRR (Z80Context* ctx, int adjFlags, byte val)
+static uint8_t doRR (Z80Context* ctx, int adjFlags, uint8_t val)
 {
     int CY = GETFLAG(F_C);
     VALFLAG(F_C, (val & 0x01));
@@ -559,7 +559,7 @@ static byte doRR (Z80Context* ctx, int adjFlags, byte val)
 }
 
 
-static byte doSL (Z80Context* ctx, byte val, int isArith)
+static uint8_t doSL (Z80Context* ctx, uint8_t val, int isArith)
 {
     VALFLAG(F_C, (val & 0x80) != 0);
     val <<= 1;
@@ -575,7 +575,7 @@ static byte doSL (Z80Context* ctx, byte val, int isArith)
 }
 
 
-static byte doSR (Z80Context* ctx, byte val, int isArith)
+static uint8_t doSR (Z80Context* ctx, uint8_t val, int isArith)
 {
     int b = val & 0x80;
 
@@ -593,7 +593,7 @@ static byte doSR (Z80Context* ctx, byte val, int isArith)
 }
 
 
-static void doPush (Z80Context* ctx, ushort val)
+static void doPush (Z80Context* ctx, uint16_t val)
 {
 	WR.SP--;
 	WR.SP--;
@@ -601,9 +601,9 @@ static void doPush (Z80Context* ctx, ushort val)
 }
 
 
-static ushort doPop (Z80Context* ctx)
+static uint16_t doPop (Z80Context* ctx)
 {
-	ushort val;
+	uint16_t val;
 	val = read16(ctx, WR.SP);
 	WR.SP++;
 	WR.SP++;
@@ -611,10 +611,10 @@ static ushort doPop (Z80Context* ctx)
 }
 
 
-static byte doCP_HL(Z80Context * ctx)
+static uint8_t doCP_HL(Z80Context * ctx)
 {
-	byte val = read8(ctx, WR.HL);
-	byte result = doArithmetic(ctx, val, 0, 1);	
+	uint8_t val = read8(ctx, WR.HL);
+	uint8_t result = doArithmetic(ctx, val, 0, 1);	
 	adjustFlags(ctx, val);
 	return result;
 }
@@ -665,7 +665,7 @@ static void do_execute(Z80Context* ctx)
 	struct Z80OpcodeEntry* entries = current->entries;
 	Z80OpcodeFunc func;
 	
-	byte opcode;
+	uint8_t opcode;
 	int offset = 0;
 	do
 	{
@@ -751,7 +751,7 @@ static void do_int(Z80Context* ctx)
     else if (ctx->IM == 2)
     {
         doPush(ctx, ctx->PC);
-		ushort vector_address = (ctx->I << 8) | ctx->int_vector;
+		uint16_t vector_address = (ctx->I << 8) | ctx->int_vector;
 		ctx->PC = read16(ctx, vector_address);
 		ctx->tstates += 7;
     }
@@ -787,8 +787,8 @@ void Z80Debug (Z80Context* ctx, char* dump, char* decode)
 	struct Z80OpcodeTable* current = &opcodes_main;
 	struct Z80OpcodeEntry* entries = current->entries;
 	char* fmt;
-	byte opcode;
-	ushort parm;
+	uint8_t opcode;
+	uint16_t parm;
 	int offset = 0;
 	int PC = ctx->PC;
 	int size = 0;
@@ -870,7 +870,7 @@ void Z80RESET (Z80Context* ctx)
 }
 
 
-void Z80INT (Z80Context* ctx, byte value)
+void Z80INT (Z80Context* ctx, uint8_t value)
 {
 	ctx->int_req = 1;
 	ctx->int_vector = value;

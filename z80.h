@@ -26,36 +26,33 @@
 #ifndef _Z80_H_
 #define _Z80_H_
 
+#include <stdint.h>
 #include "stdio.h"
 
-typedef unsigned short ushort;
-typedef unsigned char byte;
-
-
 /** Function type to emulate data read. */
-typedef byte (*Z80DataIn) 	(int param, ushort address);
+typedef uint8_t (*Z80DataIn) 	(int param, uint16_t address);
 
 
 /** Function type to emulate data write. */
-typedef void (*Z80DataOut)	(int param, ushort address, byte data);
+typedef void (*Z80DataOut)	(int param, uint16_t address, uint8_t data);
 
 
-/** 
+/**
  * A Z80 register set.
  * An union is used since we want independent access to the high and low bytes of the 16-bit registers.
  */
-typedef union 
+typedef union
 {
 	/** Word registers. */
 	struct
 	{
-		ushort AF, BC, DE, HL, IX, IY, SP;
+		uint16_t AF, BC, DE, HL, IX, IY, SP;
 	} wr;
-	
+
 	/** Byte registers. Note that SP can't be accesed partially. */
 	struct
 	{
-		byte F, A, C, B, E, D, L, H, IXl, IXh, IYl, IYh;
+		uint8_t F, A, C, B, E, D, L, H, IXl, IXh, IYl, IYh;
 	} br;
 } Z80Regs;
 
@@ -79,22 +76,22 @@ typedef struct
 {
 	Z80Regs	R1;		/**< Main register set (R) */
 	Z80Regs R2;		/**< Alternate register set (R') */
-	ushort	PC;		/**< Program counter */
-	byte	R;		/**< Refresh */
-	byte	I;
-	byte	IFF1;	/**< Interrupt Flipflop 1 */
-	byte	IFF2;	/**< Interrupt Flipflop 2 */
-	byte	IM;		/**< Instruction mode */
-	
+	uint16_t PC;		/**< Program counter */
+	uint8_t	R;		/**< Refresh */
+	uint8_t	I;
+	uint8_t	IFF1;	/**< Interrupt Flipflop 1 */
+	uint8_t	IFF2;	/**< Interrupt Flipflop 2 */
+	uint8_t	IM;		/**< Instruction mode */
+
 	Z80DataIn	memRead;
 	Z80DataOut	memWrite;
 	int			memParam;
-	
+
 	Z80DataIn	ioRead;
 	Z80DataOut	ioWrite;
 	int			ioParam;
-	
-	byte		halted;
+
+	uint8_t		halted;
 	unsigned	tstates;
 
 	/* Below are implementation details which may change without
@@ -104,17 +101,17 @@ typedef struct
 
 	/* If true, an NMI has been requested. */
 
-	byte nmi_req;
+	uint8_t nmi_req;
 
 	/* If true, a maskable interrupt has been requested. */
 
-	byte int_req;
+	uint8_t int_req;
 
 	/* If true, defer checking maskable interrupts for one
 	 * instruction.  This is used to keep an interrupt from happening
 	 * immediately after an IE instruction. */
 
-	byte defer_int;
+	uint8_t defer_int;
 
 	/* When a maskable interrupt has been requested, the interrupt
 	 * vector.  For interrupt mode 1, it's the opcode to execute.  For
@@ -122,11 +119,11 @@ typedef struct
 	 * Not used for interrupt mode 0.
 	 */
 
-	byte int_vector;
+	uint8_t int_vector;
 
 	/* If true, then execute the opcode in int_vector. */
 
-	byte exec_int_vector;
+	uint8_t exec_int_vector;
 
 } Z80Context;
 
@@ -156,7 +153,7 @@ void Z80RESET (Z80Context* ctx);
  *
  * @param value The value to read from the data bus
  */
-void Z80INT (Z80Context* ctx, byte value);
+void Z80INT (Z80Context* ctx, uint8_t value);
 
 
 /** Generates a non-maskable interrupt. */
