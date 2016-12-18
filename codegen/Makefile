@@ -1,13 +1,9 @@
-.PHONY: all
-all: opcodes
+.PHONY: opcodes
+opcodes: opcodes_impl.c
 
 mktables: mktables.c
 
-.PHONY: force
-force: clean opcodes
-
-.PHONY: opcodes
-opcodes: mktables opcodes.lst mktables.spec
+opcodes_impl.c: mktables opcodes.lst mktables.spec
 	./mktables
 
 .PHONY: clean
