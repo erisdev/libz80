@@ -30,11 +30,14 @@
 #include "stdio.h"
 
 /** Function type to emulate data read. */
-typedef uint8_t (*Z80DataIn) 	(int param, uint16_t address);
+typedef uint8_t (*Z80DataIn) 	(void* param, uint16_t address);
 
 
 /** Function type to emulate data write. */
-typedef void (*Z80DataOut)	(int param, uint16_t address, uint8_t data);
+typedef void (*Z80DataOut)	(void* param, uint16_t address, uint8_t data);
+
+/** Function type for timing */
+typedef void (*Z80Timing)	(void* param);
 
 
 /**
@@ -85,11 +88,14 @@ typedef struct
 
 	Z80DataIn	memRead;
 	Z80DataOut	memWrite;
-	int			memParam;
+	void*		memParam;
 
 	Z80DataIn	ioRead;
 	Z80DataOut	ioWrite;
-	int			ioParam;
+	void*		ioParam;
+
+	Z80Timing   timingFunc;
+	void*       timingParam;
 
 	uint8_t		halted;
 	unsigned	tstates;
