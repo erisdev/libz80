@@ -4,14 +4,14 @@ OBJS = z80.o
 FLAGS = -fPIC -Wall
 
 .PHONY: all
-all: libz80.so
+all: libz80.a
 
 .PHONY: codegen
 codegen:
 	$(MAKE) -C codegen
 
-libz80.so: $(OBJS)
-	gcc $(FLAGS) -shared -o libz80.so $(OBJS)
+libz80.a: $(OBJS)
+	$(AR) -rcs $@ $<
 
 z80.o: z80.c z80.h | codegen
 

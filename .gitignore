@@ -1,4 +1,4 @@
 /codegen/mktables
 *.dSYM
-*.so
+*.a
 *.o
